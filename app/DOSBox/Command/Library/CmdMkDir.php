@@ -24,10 +24,15 @@ class CmdMkDir extends BaseCmdMk
 
     public function checkParameterValues(IOutputter $outputter)
     {
-        if ($this->checkExistingFileDir($this->getParameterAt(0))) {
-            $outputter->printLine('File with name ' . $this->getParameterAt(0) . ' is existing');
+        if (!isset($this->params[0]) && empty($this->params[0])) {
+            $outputter->printLine('File name not defined');
             return false;
         }
+        if ($this->checkExistingFileDir($this->getParameterAt(0))) {
+            $outputter->printLine('File or Directory with name ' . $this->getParameterAt(0) . ' is existing');
+            return false;
+        }
+        
         for ($i = 0; $i < $this->getParameterCount(); $i++) {
             if ($this->parameterContainsBacklashes($this->getParameterAt($i), $outputter)) {
                 return false;
