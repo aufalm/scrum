@@ -25,6 +25,24 @@ class CmdMkFileTest extends DOSBoxTestCase {
     }
 
     public function testCmdMkFile_WithoutContent_CreatesEmptyFile() {
+        // given
+        $newFileName = "testFile";
+        $newFileContent = "";
+
+        // when
+        $this->executeCommand("mkfile " . $newFileName . " " . $newFileContent);
+
+        // then
+        // 1. File is added
+        $this->assertEquals($this->numbersOfFilesBeforeTest + 1, $this->drive->getCurrentDirectory()->getNumberOfContainedFiles());
+
+        // 2. No error is found in console
+        $this->assertNotNull($this->mockOutputter);
+        $this->assertEmpty($this->mockOutputter->getOutput());
+
+        // 3. File has content
+        $createdFile = $this->drive->getItemFromPath( $this->drive->getCurrentDirectory()->getPath() . "\\" . $newFileName);
+        $this->assertEmpty($createdFile->getFileContent());
         // To be implemented
     }
 
@@ -50,7 +68,17 @@ class CmdMkFileTest extends DOSBoxTestCase {
     }
 
     public function testCmdMkFile_NoParameters_ReportsError(){
-        // To be implemented
+
+        // when
+        $this->executeCommand("mkfile");
+
+        // then
+        // 1. File is added
+        $this->assertEquals($this->numbersOfFilesBeforeTest + 1, $this->drive->getCurrentDirectory()->getNumberOfContainedFiles());
+
+        // 2. No error is found in console
+        //$this->assertNotNull($this->mockOutputter);
+        $this->assertEquals("File name not defined",$this->mockOutputter->getOutput());
     }
 
 } 
