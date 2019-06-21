@@ -23,29 +23,13 @@ abstract class BaseCmdMk extends Command
 
     }
 
-    public function checkExistingFile($name)
+    public function checkExistingFileDir($name)
     {
         $this->currentDir = $this->getDrive()->getCurrentDirectory();
         $this->content = $this->currentDir->getContent();
         foreach ($this->content as $item) {
-            if (!$item->isDirectory()) {
-                if ($item->getName() == $name) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public function checkExistingDir($name)
-    {
-        $this->currentDir = $this->getDrive()->getCurrentDirectory();
-        $this->content = $this->currentDir->getContent();
-        foreach ($this->content as $item) {
-            if ($item->isDirectory()) {
-                if ($item->getName() == $name) {
-                    return true;
-                }
+            if ($item->getName() == $name) {
+                return true;
             }
         }
         return false;

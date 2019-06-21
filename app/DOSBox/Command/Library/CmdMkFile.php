@@ -22,8 +22,8 @@ class CmdMkFile extends BaseCmdMk
 
     public function checkParameterValues(IOutputter $outputter)
     {
-        if ($this->checkExistingDir($this->getParameterAt(0))) {
-            $outputter->printLine('Directory with name ' . $this->getParameterAt(0) . ' is existing');
+        if ($this->checkExistingFileDir($this->getParameterAt(0))) {
+            $outputter->printLine('File or Directory with name ' . $this->getParameterAt(0) . ' is existing');
             return false;
         }
         if (!isset($this->params[0]) && empty($this->params[0])) {
