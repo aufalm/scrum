@@ -4,31 +4,38 @@ namespace DOSBox\Filesystem;
 
 use DOSBox\Filesystem\FileSystemItem;
 
-class File extends FileSystemItem {
+class File extends FileSystemItem
+{
     private $content;
 
-    public function __construct($name, $content){
-        parent::__construct($name, NULL);
+    public function __construct($name, $content)
+    {
+        parent::__construct($name, null);
         $this->content = $content;
     }
 
-    public function getFileContent() {
+    public function getFileContent()
+    {
         return $this->content;
     }
 
-    public function isDirectory() {
+    public function isDirectory()
+    {
         return false;
     }
 
-    public function getSize() {
+    public function getSize()
+    {
         return strlen($this->content);
     }
 
-    public function getNumberOfContainedFiles() {
-        return 0;  // A file does not contain any other files
+    public function getNumberOfContainedFiles()
+    {
+        return 0; // A file does not contain any other files
     }
 
-    public function getNumberOfContainedDirectories() {
-        return 0;  // A file does not contain any sub-directories
+    public function getNumberOfContainedDirectories()
+    {
+        return 0; // A file does not contain any sub-directories
     }
 }
