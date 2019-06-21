@@ -72,13 +72,24 @@ class CmdMkFileTest extends DOSBoxTestCase {
         // when
         $this->executeCommand("mkfile");
 
+        // 2. No error is found in console
+        $this->assertNotNull($this->mockOutputter);
+        $this->assertContains("Wrong parameter entered.",$this->mockOutputter->getOutput());
+    }
+
+    public function testCmdMkFile_SameFileName_ReportsError(){
+        // given
+        $newFileName = "File1";
+        // when
+        $this->executeCommand("mkfile ". $newFileName);
         // then
         // 1. File is added
         $this->assertEquals($this->numbersOfFilesBeforeTest + 1, $this->drive->getCurrentDirectory()->getNumberOfContainedFiles());
 
-        // 2. No error is found in console
-        //$this->assertNotNull($this->mockOutputter);
-        $this->assertEquals("File name not defined",$this->mockOutputter->getOutput());
+        $this->executeCommand("mkfile ". $newFileName);
+        
+        $this->assertEquals($this->numbersOfFilesBeforeTest + 1, $this->drive->getCurrentDirectory()->getNumberOfContainedFiles());
+       
     }
 
 } 

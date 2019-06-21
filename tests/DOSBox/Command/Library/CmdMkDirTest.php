@@ -80,6 +80,21 @@ class CmdMkDirTest extends DOSBoxTestCase {
 
         $this->assertEmpty($this->mockOutputter->getOutput());
     }
+
+    public function testCmdMkFile_SameFileName_ReportsError(){
+        // given
+        $newFileName = "Folder1";
+        // when
+        $this->executeCommand("mkdir ". $newFileName);
+        // then
+        // 1. Folder is added
+        $this->assertEquals($this->numbersOfDirectoriesBeforeTest + 1, $this->drive->getRootDirectory()->getNumberOfContainedDirectories());
+
+        $this->executeCommand("mkdir ". $newFileName);
+        
+        $this->assertEquals($this->numbersOfDirectoriesBeforeTest + 1, $this->drive->getRootDirectory()->getNumberOfContainedDirectories());
+       
+    }
 /*
     public function testCmdMkDir_AllParametersAreReset() {
         $testDirName = "test1";
