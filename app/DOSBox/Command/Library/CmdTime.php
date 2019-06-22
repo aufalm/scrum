@@ -23,6 +23,9 @@ class CmdTime extends Command
     {
         if ($this->getParameterCount() < 1) {
             return true;
+        } else {
+            $parameters = $this->params[0];
+            return (date('H:i:s', strtotime($parameters)) == $parameters);
         }
         return false;
     }
@@ -30,10 +33,7 @@ class CmdTime extends Command
     public function execute(IOutputter $outputter)
     {
         if (count($this->params) < 1) {
-            $this->printAllHelp($outputter);
-        } else {
-            $parameter = strtoupper($this->params[0]);
-            $this->printHelp($outputter, $parameter);
+            $outputter->printLine(date("H:i:s"));
         }
     }
 
