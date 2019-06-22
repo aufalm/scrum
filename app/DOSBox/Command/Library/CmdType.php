@@ -16,14 +16,11 @@ class CmdType extends Command
 
     public function checkNumberOfParameters($numberOfParametersEntered)
     {
-        return ($numberOfParametersEntered == 0 || $numberOfParametersEntered == 1);
+        return ($numberOfParametersEntered == 1);
     }
 
     public function checkParameterValues(IOutputter $outputter)
     {
-        if ($this->getParameterCount() < 1) {
-            return true;
-        }
         $name = $this->params[0];
         $currentDir = $this->getDrive()->getCurrentDirectory();
         $content = $currentDir->getContent();
@@ -49,7 +46,13 @@ class CmdType extends Command
                 if ($item->isDirectory()) {
                     $outputter->printLine("Access is denied");
                 } else {
-                    $outputter->printLine($item->getContent());
+                    $outputter->printNoLine("\t\t\t\t");
+                    $outputter->printNoLine($item->getCreatedAt());
+                    $outputter->printNoLine("\t");
+                    $outputter->printNoLine($item->getSize() . " ");
+
+                    $outputter->printNoLine($item->getName());
+                    $outputter->newLine();
                 }
             }
         }
