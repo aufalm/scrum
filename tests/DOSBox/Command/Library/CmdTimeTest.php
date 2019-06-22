@@ -32,12 +32,11 @@ class CmdCdTest extends DOSBoxTestCase {
         // given
         $command = "time ";
         $time = "21:30:10";
-        $expectedOutput = "";
         // when
         $this->executeCommand($command.$time);
         // then
         
-        $this->assertSame($expectedOutput, $this->mockOutputter->getOutput());
+        $this->assertEmpty($this->mockOutputter->getOutput());
     }
 
     public function testCmdTime_WithParameterString_ReportError(){
