@@ -5,7 +5,7 @@ use DOSBox\Filesystem\File;
 use DOSBox\Command\Library\CmdHelp;
 use DOSBox\Filesystem\Drive;
 
-class CmdCdTest extends DOSBoxTestCase {
+class CmdHelpTest extends DOSBoxTestCase {
     private $command;
     private $listOfCommands;
 

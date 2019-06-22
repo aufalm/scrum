@@ -5,7 +5,7 @@ use DOSBox\Filesystem\File;
 use DOSBox\Command\Library\CmdTime;
 use DOSBox\Filesystem\Drive;
 
-class CmdCdTest extends DOSBoxTestCase {
+class CmdTimeTest extends DOSBoxTestCase {
     private $command;
 
     protected function setUp() {
