@@ -5,6 +5,7 @@
 
 use DOSBox\Filesystem\Directory;
 use DOSBox\Command\Library\CmdMkFile;
+use DOSBox\Command\Library\CmdDir;
 use DOSBox\Filesystem\Drive;
 
 class CmdMkFileTest extends DOSBoxTestCase {
@@ -20,6 +21,10 @@ class CmdMkFileTest extends DOSBoxTestCase {
         $this->rootDir = $this->drive->getRootDir();
 
         $this->commandInvoker->addCommand($this->command);
+
+        $this->command2 = new CmdDir("dir", $this->drive);
+
+        $this->commandInvoker->addCommand($this->command2);
 
         $this->numbersOfFilesBeforeTest = $this->drive->getRootDirectory()->getNumberOfContainedFiles();
     }
@@ -90,6 +95,15 @@ class CmdMkFileTest extends DOSBoxTestCase {
         
         $this->assertEquals($this->numbersOfFilesBeforeTest + 1, $this->drive->getCurrentDirectory()->getNumberOfContainedFiles());
        
+    }
+
+    public function testMkFile_ContainTime(){
+        $time = date("d-m-Y h:i:s a");
+        $this->executeCommand("mkfile fileA");
+        $this->assertEquals($this->numbersOfFilesBeforeTest + 1, $this->drive->getCurrentDirectory()->getNumberOfContainedFiles());
+
+        $this->executeCommand("dir");
+        $this->assertContains($time, $this->mockOutputter->getOutput());
     }
 
 } 

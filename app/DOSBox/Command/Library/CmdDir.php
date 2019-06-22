@@ -41,9 +41,9 @@ class CmdDir extends Command
             return null;
         }
 
-        if (!$fsi->isDirectory()) {
-            return $fsi->getParent();
-        }
+        // if (!$fsi->isDirectory()) {
+        //     return $fsi->getParent();
+        // }
 
         return $fsi;
     }
@@ -52,15 +52,44 @@ class CmdDir extends Command
     {
         $this->checkParameterValues($outputter);
 
-        $this->printHeader($this->directoryToPrint, $outputter);
-        $this->printContent($this->directoryToPrint->getContent(), $outputter);
-        $this->printFooter($this->directoryToPrint, $outputter);
+        $item = $this->directoryToPrint;
+
+        if (count($this->params) == 1) {
+            if ($item->isDirectory()) {
+                $outputter->printNoLine("\t\t\t");
+                $outputter->printNoLine($item->getCreatedAt());
+                $outputter->printNoLine("\t");
+                $outputter->printNoLine("<DIR>");
+                $outputter->printNoLine("\t");
+                $outputter->printNoLine("  ");
+            } else {
+                $outputter->printNoLine("\t\t\t\t");
+                $outputter->printNoLine($item->getCreatedAt());
+                $outputter->printNoLine("\t");
+                $outputter->printNoLine($item->getSize() . " ");
+            }
+
+            $outputter->printNoLine($item->getName());
+            $outputter->newLine();
+        } else {
+
+            $this->printHeader($this->directoryToPrint, $outputter);
+            $this->printContent($this->directoryToPrint->getContent(), $outputter);
+            $this->printFooter($this->directoryToPrint, $outputter);
+        }
     }
 
     public function printHeader($directoryToPrint, IOutputter $outputter)
     {
-        $outputter->printLine(" Directory of " . $directoryToPrint->getPath());
-        $outputter->newLine();
+        if ($directoryToPrint->isDirectory()) {
+            $outputter->printLine(" Directory of " . $directoryToPrint->getPath() . " " . $directoryToPrint->getCreatedAt());
+            $outputter->newLine();
+        } else {
+            $outputter->printNoLine("\t\t\t\t");
+            $outputter->printNoLine($item->getCreatedAt());
+            $outputter->printNoLine("\t");
+            $outputter->printNoLine($item->getSize() . " ");
+        }
     }
 
     public function printContent($directoryContent, IOutputter $outputter)
