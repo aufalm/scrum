@@ -19,7 +19,7 @@ class Drive implements IDrive{
     }
 
     public function getLabel(){
-        return $this->getLabel();
+        return $this->label;
     }
 
     public function setLabel($label){
@@ -47,7 +47,7 @@ class Drive implements IDrive{
     }
 
     public function getPrompt(){
-        return $this->currentDir->getPath() . '\> ';
+        return $this->currentDir->getPath() . $this->label . '\> ';
     }
 
     public function getCurrentDirectory(){
