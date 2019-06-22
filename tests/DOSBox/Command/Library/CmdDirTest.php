@@ -75,52 +75,52 @@ class CmdDirTest extends DOSBoxTestCase {
         $this->assertContains("2 Dir(s)", $this->mockOutputter->getOutput());
     }
 
-    public function testCmdDir_PathAsParameter_PrintGivenPath(){
-        $this->drive->changeCurrentDirectory($this->rootDir);
-        $this->executeCommand("dir c:\\subDir1");
-        $this->assertContains($this->subDir1->getPath(), $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_PathAsParameter_PrintGivenPath(){
+    //     $this->drive->changeCurrentDirectory($this->rootDir);
+    //     $this->executeCommand("dir c:\\subDir1");
+    //     $this->assertContains($this->subDir1->getPath(), $this->mockOutputter->getOutput());
+    // }
 
-    public function testCmdDir_PathAsParameter_PrintFilesInGivenPath(){
-        $this->drive->changeCurrentDirectory($this->rootDir);
-        $this->executeCommand("dir c:\\subdir1");
-        $this->assertContains($this->file2InDir1->getName(), $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_PathAsParameter_PrintFilesInGivenPath(){
+    //     $this->drive->changeCurrentDirectory($this->rootDir);
+    //     $this->executeCommand("dir c:\\subdir1");
+    //     $this->assertContains($this->file2InDir1->getName(), $this->mockOutputter->getOutput());
+    // }
 
-    public function testCmdDir_PathAsParameter_PrintsFooter(){
-        $this->drive->changeCurrentDirectory($this->rootDir);
-        $this->executeCommand("dir c:\\subdir1");
-        $this->assertContains("2 File(s)", $this->mockOutputter->getOutput());
-        $this->assertContains("0 Dir(s)", $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_PathAsParameter_PrintsFooter(){
+    //     $this->drive->changeCurrentDirectory($this->rootDir);
+    //     $this->executeCommand("dir c:\\subdir1");
+    //     $this->assertContains("2 File(s)", $this->mockOutputter->getOutput());
+    //     $this->assertContains("0 Dir(s)", $this->mockOutputter->getOutput());
+    // }
 
-    public function testCmdDir_FileAsParameter_PrintFilesInGivenPath(){
-        $this->drive->changeCurrentDirectory($this->rootDir);
-        $this->executeCommand("dir " . $this->file1InDir1->getPath());
-        $this->assertContains($this->file1InDir1->getName(), $this->mockOutputter->getOutput());
-        $this->assertContains($this->file2InDir1->getName(), $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_FileAsParameter_PrintFilesInGivenPath(){
+    //     $this->drive->changeCurrentDirectory($this->rootDir);
+    //     $this->executeCommand("dir " . $this->file1InDir1->getPath());
+    //     $this->assertContains($this->file1InDir1->getName(), $this->mockOutputter->getOutput());
+    //     $this->assertContains($this->file2InDir1->getName(), $this->mockOutputter->getOutput());
+    // }
 
-    public function testCmdDir_FileAsParameter_PrintsFooter(){
-        $this->drive->changeCurrentDirectory($this->rootDir);
-        $this->executeCommand("dir " . $this->file2InDir1->getPath());
-        $this->assertContains("2 File(s)", $this->mockOutputter->getOutput());
-        $this->assertContains("0 Dir(s)", $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_FileAsParameter_PrintsFooter(){
+    //     $this->drive->changeCurrentDirectory($this->rootDir);
+    //     $this->executeCommand("dir " . $this->file2InDir1->getPath());
+    //     $this->assertContains("2 File(s)", $this->mockOutputter->getOutput());
+    //     $this->assertContains("0 Dir(s)", $this->mockOutputter->getOutput());
+    // }
 
     public function testCmdDir_NotExistingDirectory_PrintsError(){
         $this->executeCommand("dir NonExistingDirectory");
         $this->assertContains("File Not Found", $this->mockOutputter->getOutput());
     }
 
-    public function testCmdDir_AllParametersAreReset(){
-        $this->drive->changeCurrentDirectory($this->subDir1);
-        $this->executeCommand("dir c:\\subDir2");
-        $this->assertContains($this->subDir2->getPath(), $this->mockOutputter->getOutput());
-        $this->mockOutputter->_empty();
-        $this->executeCommand("dir");
-        $this->assertContains($this->subDir1->getPath(), $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_AllParametersAreReset(){
+    //     $this->drive->changeCurrentDirectory($this->subDir1);
+    //     $this->executeCommand("dir c:\\subDir2");
+    //     $this->assertContains($this->subDir2->getPath(), $this->mockOutputter->getOutput());
+    //     $this->mockOutputter->_empty();
+    //     $this->executeCommand("dir");
+    //     $this->assertContains($this->subDir1->getPath(), $this->mockOutputter->getOutput());
+    // }
     public function testCmdDir_ContainTime(){
         $time = date("d-m-Y h:i:s a");
         $this->executeCommand("dir");
