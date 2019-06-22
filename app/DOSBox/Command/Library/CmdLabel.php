@@ -31,28 +31,26 @@ class CmdLabel extends Command
     {
         if (count($this->params) == 0) {
             $line = "";
-            while(strcmp(trim($line), "exit") != 0){
+            while (strcmp(trim($line), "exit") != 0) {
                 $outputter->printLine("Then this message will be prompted:");
                 $outputter->printLine("Volume label (32 character, ENTER for none)?");
-    
-                try{
+
+                try {
                     $char = trim(fread(STDIN, 256));
                     //$char = trim(fgets(STDIN));
                     $line = $char;
-                    if ($line !== null) {
+                    if ($line != null) {
                         $this->getDrive()->setLabel($line);
                         $outputter->printLine("The volume name oc C: is set to " . $this->getDrive()->getLabel());
                     }
-                } catch (Exception $e){
+                } catch (Exception $e) {
                     // do nothing by intention
                 }
                 break;
             }
-            
 
         } else if (count($this->params) == 2) {
             $this->getDrive()->setLabel($this->params[1]);
         }
     }
 }
-?>
