@@ -9,6 +9,7 @@ use DOSBox\Command\Library\CmdMkDir as CmdMkDir;
 use DOSBox\Command\Library\CmdMkFile as CmdMkFile;
 use DOSBox\Command\Library\CmdRen;
 use DOSBox\Command\Library\CmdTime;
+use DOSBox\Command\Library\CmdLabel;
 use DOSBox\Command\Library\CmdType;
 use DOSBox\Interfaces\IDrive;
 
@@ -27,6 +28,7 @@ class CommandFactory
         array_push($this->commands, new CmdMkFile("mf", $drive));
         array_push($this->commands, new CmdHelp("help", $drive));
         array_push($this->commands, new CmdTime("time", $drive));
+        array_push($this->commands, new CmdLabel("label", $drive));
         array_push($this->commands, new CmdRen("ren", $drive));
         array_push($this->commands, new CmdType("type", $drive));
 
