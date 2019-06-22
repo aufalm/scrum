@@ -3,6 +3,8 @@
 use DOSBox\Filesystem\Directory;
 use DOSBox\Filesystem\File;
 use DOSBox\Command\Library\CmdDir;
+use DOSBox\Command\Library\CmdMkFile;
+use DOSBox\Command\Library\CmdMkDir;
 use DOSBox\Filesystem\Drive;
 
 class CmdDirTest extends DOSBoxTestCase {
@@ -38,6 +40,12 @@ class CmdDirTest extends DOSBoxTestCase {
 
         $this->command = new CmdDir("dir", $this->drive);
         $this->commandInvoker->addCommand($this->command);
+
+        $this->command2 = new CmdMkFile("mkfile", $this->drive);
+        $this->commandInvoker->addCommand($this->command2);
+
+        $this->command3 = new CmdMkDir("mkdir", $this->drive);
+        $this->commandInvoker->addCommand($this->command3);
     }
 
     public function testCmdDir_WithoutParameter_PrintPathOfCurrentDirectory() {
@@ -113,4 +121,23 @@ class CmdDirTest extends DOSBoxTestCase {
         $this->executeCommand("dir");
         $this->assertContains($this->subDir1->getPath(), $this->mockOutputter->getOutput());
     }
+    public function testCmdDir_ContainTime(){
+        $time = date("d-m-Y h:i:s a");
+        $this->executeCommand("dir");
+        $this->assertContains($time, $this->mockOutputter->getOutput());
+    }
+
+    public function testCmdDirFilename_ContainTime(){
+        $time = date("d-m-Y h:i:s a");
+        $this->executeCommand("mkfile a");
+        $this->executeCommand("dir a");
+        $this->assertContains($time, $this->mockOutputter->getOutput());
+    }
+
+    // public function testCmdDir_mkdir_ContainTime(){
+    //     $time = date("d-m-Y h:i:s a");
+    //     $this->executeCommand("mkdir dirA");
+    //     $this->executeCommand("dir dirA");
+    //     $this->assertContains($time, $this->mockOutputter->getOutput());
+    // }
 } 
