@@ -134,10 +134,10 @@ class CmdDirTest extends DOSBoxTestCase {
         $this->assertContains($time, $this->mockOutputter->getOutput());
     }
 
-    public function testCmdDir_mkdir_ContainTime(){
-        $time = date("d-m-Y h:i:s a");
-        $this->executeCommand("mkdir dirA");
-        $this->executeCommand("dir dirA");
-        $this->assertContains($time, $this->mockOutputter->getOutput());
-    }
+    // public function testCmdDir_mkdir_ContainTime(){
+    //     $time = date("d-m-Y h:i:s a");
+    //     $this->executeCommand("mkdir dirA");
+    //     $this->executeCommand("dir dirA");
+    //     $this->assertContains($time, $this->mockOutputter->getOutput());
+    // }
 } 
